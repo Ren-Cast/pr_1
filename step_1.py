@@ -1,7 +1,9 @@
-import tkinter as tk
-import os
-import socket
+import tkinter as tk # Импорт библиотеки для создания графического интерфейса
+import os # Импорт модуля для работы с операционной системой
+import socket # Импорт модуля для работы с сетевыми функциями
 
+
+# Функция для получения имени пользователя
 def get_username():
     return os.environ.get('USER') or os.environ.get('USERNAME') or 'unknown'
 
@@ -20,7 +22,7 @@ def expand_variables(text):
 
 username = get_username()
 hostname = get_hostname()
-window_title = f"Эмулятор - [{username}@{hostname}]"
+window_title = "VFS"
 
 def run_command():
     data = entry.get().strip()
@@ -30,6 +32,8 @@ def run_command():
     parts = expanded_data.split()
     command = parts[0]
     args = parts[1:]
+
+    # Обработка команд
     if command == 'exit':
         root.destroy()
         return
@@ -41,6 +45,7 @@ def run_command():
         output_text.insert(tk.END, f"{command} : command is not found\n")
     entry.delete(0, tk.END)
 
+# Создание главного окна GUI
 root = tk.Tk()
 root.title(window_title)
 root.configure(bg='black')
